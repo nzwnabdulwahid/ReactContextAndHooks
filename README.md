@@ -34,27 +34,31 @@ During this README is written, this is 2 way of *consuming* the states.
 ```
 	render() {
 		return (
-			<ThemeContext.Consumer>{(context) => {
-				const { isLightTheme, light, dark } = context;
-				const theme = isLightTheme ? light : dark;
+			<AuthContext.Consumer>{(authContext) => (
+				<ThemeContext.Consumer>{(themeContext) => {
+					const { isLightTheme, light, dark } = themeContext;
+					const { isAuthenticated, toggleAuth } = authContext;
+					const theme = isLightTheme ? light : dark;
 
-				return (
-					<nav style={{background: theme.ui, color:theme.syntax}}>
-						<h1>Context App</h1>
-						<ul>
-							<li>Home</li>
-							<li>About</li>
-							<li>Contact</li>
-						</ul>
-					</nav>
-				)
-			}}
-				
-			</ThemeContext.Consumer>
+					return (
+						<nav style={{background: theme.ui, color:theme.syntax}}>
+							<h1>Context App</h1>
+							<div>
+								<button onClick={toggleAuth}>{isAuthenticated ? "Logout" : "Login"}</button>
+							</div>
+							<ul>
+								<li>Home</li>
+								<li>About</li>
+								<li>Contact</li>
+							</ul>
+						</nav>
+					)
+				}}
+				</ThemeContext.Consumer>
+			)}
+			</AuthContext.Consumer>
 		)		
 	}	
 ```
 ## TODO
- - [ ] Creating Multiple Context
- - [ ] Consuming Multiple Context
  - [ ] Hooks
