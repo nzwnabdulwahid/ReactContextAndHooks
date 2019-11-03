@@ -1,3 +1,4 @@
+
 # Context & Hooks Basic Tutorial
 
 ## Explaination - Context
@@ -60,5 +61,28 @@ During this README is written, this is 2 way of *consuming* the states.
 		)		
 	}	
 ```
+
+3.  **useContext**
+```
+const Navbar = () => {
+  const { isLightTheme, light, dark } = useContext(ThemeContext);
+  const { isAuthenticated, toggleAuth } = useContext(AuthContext);
+  const theme = isLightTheme ? light : dark;
+  return (
+    <nav style={{ background: theme.ui, color: theme.syntax }}>
+      <h1>Context App</h1>
+      <div onClick={() => toggleAuth()}>
+        { isAuthenticated ? 'Logged in' : 'Logged out' }
+      </div>
+      <ul>
+        <li>Home</li>
+        <li>About</li>
+        <li>Contact</li>
+      </ul>
+    </nav>
+  );
+}
+```
 ## TODO
- - [ ] Hooks
+ - [x] useState
+ - [x] useEffect
